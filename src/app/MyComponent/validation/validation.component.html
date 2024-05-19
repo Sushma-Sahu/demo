@@ -1,0 +1,134 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form [formGroup]="validationform" (ngSubmit)="onSubmit()">
+                <h2 class="mb-4">Register</h2>
+                <div class="form-group">
+                    <label for="name" class="form-label mb-2">Name:</label>
+                    <input type="text" formControlName="name" class="form-control" placeholder="First Name">
+                    <div class="text-danger mt-1" *ngIf="vname && vname.invalid && vname.touched">
+                        <div *ngIf="vname.getError('required')">Name is required.</div>
+                        <div *ngIf="vname.errors?.['pattern']">Invalid pattern</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label mb-2">Email:</label>
+                    <input type="email" formControlName="email" class="form-control mb-2"
+                        placeholder="Please Enter Email">
+                    <div class="text-danger mt-1"
+                        *ngIf=" vemail && vemail.invalid  && (vemail.dirty || vemail.touched)">
+                        <div *ngIf="vemail.getError('required')">Email is required.</div>
+                        <div *ngIf="vemail.getError('email')">Invalid email format.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNo" class="form-label mb-2">Phone No:</label>
+                    <br>
+                   
+                    <input type="text" formControlName="phoneNo" class="form-control mb-2"
+                        placeholder="Please Enter Phone Number" minlength="10">
+                    <!-- <div class="text-danger mt-1"
+                        *ngIf=" validationform.get('phoneNo').?.errors?.invalid || vphone.touched">
+                        this is error  
+                        <div *ngIf="vphone.getError('minLength')">Phone Number Should be 10 Digit.</div>
+                        <div *ngIf="validationform.get('phoneNo')?.errors?.['minlength']">Phone Number Should be 10 Digit.</div>
+                        <div *ngIf="phoneNo.errors?.minlength">Phone Number Should be 10 Digit.</div>
+                     </div> -->
+                    <div class="text-danger mt-1"
+                        *ngIf="validationform.get('phoneNo')?.invalid && validationform.get('phoneNo')?.touched">
+                        <div *ngIf="validationform.get('phoneNo')?.errors?.['required']">Phone Number is required.
+                        </div>
+                        <div *ngIf="validationform.get('phoneNo')?.errors?.['pattern']">Phone Number length should
+                            be 10 Number and It should not contain character!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dob" class="form-label mb-2">DOB:</label>
+                    <input type="date" formControlName="dob" class="form-control mb-2" placeholder="Select Your DOB">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label mb-2">Password:</label>
+                    <input type="password" formControlName="password" class="form-control mb-2"
+                        placeholder="Please Enter Password">
+                    <div class="text-danger mt-1" *ngIf="vpass?.invalid  && vpass?.touched">
+                        <div *ngIf="vpass?.errors?.['required']">Password is required.</div>
+                        <div *ngIf="vpass?.errors?.['pattern']">Password should contain at least 8 characters and
+                            Uppercase and lowercase letters, one special symbol, and one number!</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="passwordCfm" class="form-label mb-2">Confirm Password:</label>
+                    <input type="password" formControlName="passwordCfm" class="form-control mb-2"
+                        placeholder="Confirm Password">
+                    <div class="text-danger mt-1" *ngIf=" vCpass?.invalid  && vCpass?.touched">
+                        <div *ngIf="vCpass?.errors?.['required']">Confirm password is required.</div>
+                        <div *ngIf="validationform.get('passwordCfm')?.errors?.['minLength']">password should be at
+                            least 3
+                            digit.</div>
+                    </div>
+                    <div class="text-danger mt-1"
+                        *ngIf="validationform.errors?.['passwordMismatchError']  && vCpass?.touched">
+                        <small>Password Not Match</small>
+                    </div>
+                </div>
+                <div class="dropdown form-group">
+                    <label for="city" class="form-label mb-2">Select Countory:</label>
+                    <select id="selectedCity" class="dropdown-toggle form-control">
+                        <option *ngFor="let city of CountoryArray" [value]="city">
+                            {{city}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city" class="form-label mb-2">City:</label>
+                    <input type="text" formControlName="city" class="form-control mb-2" placeholder="Please Enter Citry Name">
+                </div>
+
+                <!-- <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="country" data-bs-toggle="dropdown" aria-expanded="false">
+                      Countory
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="country">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
+                -->
+
+
+                <div class="addmergin form-group">
+                    <label for="staticEmail2" class="form-label">Gender</label>
+                    <div class="form-check">
+                        <input class="form-check-input" value="female" type="radio" name="gender" id="female"
+                            formControlName="gender">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Female
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="male" id="male" checked
+                            formControlName="gender">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Male
+                        </label>
+                    </div>
+                </div>
+                <div class="addmergin form-group">
+                    <div class="form-check">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            isAdmin
+                        </label>
+                        <input class="form-check-input" value="isadmine" type="checkbox" name="isadmine" id="female"
+                            formControlName="isadmine">
+
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-outline-success">Submit</button>
+                <!-- <button type="submit" class="btn btn-outline-success" [disabled]="validationform.invalid">Submit</button> -->
+            </form>
+        </div>
+    </div>
+</div>

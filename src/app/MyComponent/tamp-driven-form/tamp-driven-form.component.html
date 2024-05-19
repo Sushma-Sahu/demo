@@ -1,0 +1,32 @@
+<div class="container my-3">
+    <form #loginForm="ngForm" (ngSubmit)="userLogin(loginForm.value)">
+        <!-- <input class="form-control" type="text" name="name" id="name" placeholder="Enter name" ngModel>
+        <br>
+        <br>
+        <input class="form-control" type="text" name="email" id="email" placeholder="Enter name" ngModel>
+        <br>
+        <br>
+        <input class="form-control" type="text" name="Phone No." id="PNo" placeholder="Enter password" ngModel>
+        <br>
+        <br>
+        <input class="form-control" type="text" name="email" id="email" placeholder="Enter name" ngModel>
+        <br>
+        <br>
+        <input class="form-control" type="text" name="Password" id="Password" placeholder="Enter password" ngModel>
+        <br>
+        <br> -->
+        <input class="form-control" [(ngModel)]="UserLogin.email" name="email" id="email" placeholder="Enter Email"
+            ngModel required email #name="ngModel">
+        <div class="text-danger addmergin">
+            <span *ngIf="name.invalid && name.touched"> Required filed </span>
+        </div>
+        <input class="form-control addmergin" [(ngModel)]="UserLogin.Password" type="password" #password="ngModel" name="Password" id="Password"
+            placeholder="Enter Password" ngModel required minlength="6">
+            <div class="text-danger addmergin">
+                <span *ngIf="password.invalid && password.touched"> Please Enter Password</span>
+            </div>
+        <button type="submit" class="btn btn-outline-success" [disabled]="loginForm.invalid">Submit</button>
+    </form>
+    <a class="btn btn-link" routerLink="/register-reactive" >Create new user</a>
+
+</div>

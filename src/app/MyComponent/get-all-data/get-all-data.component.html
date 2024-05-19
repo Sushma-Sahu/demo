@@ -1,0 +1,66 @@
+<div class="container my-3">
+  <div class="row">
+    <div class="col-8">
+      <button type="button" class="btn btn-primary addmergin" routerLink="/register-reactive">Add</button>
+    </div>
+    <div class="col-4">
+      
+      <button type="button" class="btn btn-primary addmergin" style="margin-left: 250px;"
+        (click)="Logout()">Logout</button>
+    </div>
+    <div style="padding-left: 
+    900px;">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search..." aria-label="Search"
+          aria-describedby="search-button" [(ngModel)]="filtername">
+        <button class="btn btn-primary" type="button" id="search-button"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+  </div>
+  <table class="table table-success table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Image</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data | paginate :{
+            itemsPerPage:tableSize,
+            currentPage:page,
+            totalItems:count} | filterPipe : filtername;  let i = index">
+        <th scope="row">{{item.id}}</th>
+
+        <td>{{item.name | checkGender : item.gender}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.age}}</td>
+        <td>{{item.gender}}</td>
+        <td><img [src]="item.userPhoto || ProfileDP" style="height:80px;width:80px" /></td>
+        <td><button type="button" routerLink="/Edit/{{item.id}}/user" class="btn "><i class="fas fa-edit"></i></button>
+
+          <button type="button" class="btn" (click)="DeleteData(item.id)"><i class="fa-solid fa-trash-can"></i></button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+
+        <pagination-controls previousLabel="Prev" nextLabel="Next"
+          (pageChange)="onTableDatachange($event)"></pagination-controls>
+      </div>
+      <div class="col-sm-3">
+
+        <select (change)="onTableSizechange($event)">
+          <option *ngFor="let size of tableSizes">{{size}}</option>
+        </select>
+      </div>
+    </div>
+  </div>

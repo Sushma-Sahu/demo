@@ -1,0 +1,62 @@
+<div class="container my-3 mb-2">
+  <form [formGroup]="RegisterForm1" (ngSubmit)="RegisterUser()" class="row g-1">
+
+    <div class="controlMeg">
+      <label for="staticEmail2" class="form-label">First Name</label>
+      <input type="text" class="form-control addmergin" id="name" name="name" formControlName="name"
+        [(ngModel)]="RegisterForm.name">
+      <span class="text-danger addmergin " *ngIf="name && name.invalid && name.touched"> This is required filed</span>
+      <!-- <span class="text-danger addmergin" *ngIf="RegisterForm1.get('name').invalid">This is a required field</span> -->
+     
+      <br>
+      <label for="staticEmail2" class="form-label">Email</label>
+      <input type="email" class="form-control addmergin" id="email" name="email" formControlName="email"
+        [(ngModel)]="RegisterForm.email">
+      <span class="text-danger addmergin" *ngIf="email && email.invalid && email.touched">This is required email
+        filed</span>
+      <div class="addmergin">
+        <label for="staticEmail2" class="form-label">Gender</label>
+        <div class="form-check">
+          <input class="form-check-input" [(ngModel)]="RegisterForm.gender" value="female" type="radio" name="gender"
+            id="female" formControlName="gender">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Female
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" [(ngModel)]="RegisterForm.gender" value="male"
+            id="male" checked formControlName="gender">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Male
+          </label>
+        </div>
+      </div>
+      <div>
+        <label for="staticEmail2" class="form-label">Age</label>
+        <input type="number" class="form-control addmergin" id="Age" name="Age" formControlName="Age"
+          [(ngModel)]="RegisterForm.Age">
+      </div>
+      <div>
+        <label for="staticEmail2" class="form-label">Password</label>
+        <input type="password" class="form-control addmergin" id="Password" name="Password" formControlName="Password"
+          [(ngModel)]="RegisterForm.Password">
+        <span class="text-danger addmergin" *ngIf="Password && Password.invalid && Password.touched"> This is required
+          filed</span>
+      </div>
+      <div>
+        <label for="staticEmail2" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control addmergin" id="ConfirmPassword" name="ConfirmPassword"
+          formControlName="ConfirmPassword" [(ngModel)]="RegisterForm.ConfirmPassword">
+        <span class="text-danger addmergin"
+          *ngIf="ConfirmPassword && ConfirmPassword.invalid && ConfirmPassword.touched"> This is required filed</span>
+          <div class="text-danger addmergin">{{this.checkConfirmPass}}</div>
+      </div>
+      <div class="addmergin">
+        <input type="file" (change)="handleFileInput($event)">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="RegisterForm1.invalid">Register</button>
+      <button type="submit" class="btn btn-primary" (click)="BackOn()" style="margin-left:10px;">Cancel</button>
+
+    </div>
+  </form>
+</div>
